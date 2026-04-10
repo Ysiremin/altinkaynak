@@ -15,8 +15,11 @@ const CONFIG = {
   API_GOLD: 'https://altin-fiyat-proxy.yasireminciftci.workers.dev',
 
   // Gösterilecek altın türleri ve sıralama
-  // Ziynet Altınları
-  ZIYNET_CODES: ['C', 'EC', 'Y', 'EY', 'T', 'ET', 'G', 'EG', 'A', 'A5', 'R', 'H'],
+  // Popüler Altınlar (en üstte gösterilir)
+  POPULAR_CODES: ['GA', 'C', 'Y', 'T'],
+
+  // Ziynet Altınları (Eski olanlar en alta)
+  ZIYNET_CODES: ['G', 'EG', 'A', 'A5', 'R', 'H', 'EC', 'EY', 'ET'],
   // Gram & Ayar Altınları
   GRAM_CODES: ['GA', 'GAT', 'HH_T', 'CH_T', 'B', 'B_T', '18', '14'],
   // Borsa & Diğer
@@ -113,6 +116,7 @@ const elements = {
   clockEl: document.getElementById('live-clock'),
   dateEl: document.getElementById('live-date'),
   updateTimeEl: document.getElementById('update-time'),
+  popularTableBody: document.getElementById('popular-table-body'),
   ziynetTableBody: document.getElementById('ziynet-table-body'),
   gramTableBody: document.getElementById('gram-table-body'),
   borsaTableBody: document.getElementById('borsa-table-body'),
@@ -120,6 +124,7 @@ const elements = {
   errorBanner: document.getElementById('error-banner'),
   errorMessage: document.getElementById('error-message'),
 
+  popularBadge: document.getElementById('popular-badge'),
   ziynetBadge: document.getElementById('ziynet-badge'),
   gramBadge: document.getElementById('gram-badge'),
   borsaBadge: document.getElementById('borsa-badge')
@@ -218,6 +223,7 @@ function renderTable(tableBody, codes) {
 }
 
 function renderAllTables() {
+  renderTable(elements.popularTableBody, CONFIG.POPULAR_CODES);
   const zCount = renderTable(elements.ziynetTableBody, CONFIG.ZIYNET_CODES);
   const gCount = renderTable(elements.gramTableBody, CONFIG.GRAM_CODES);
   const bCount = renderTable(elements.borsaTableBody, CONFIG.BORSA_CODES);
@@ -279,6 +285,7 @@ function renderSkeletons() {
     </tr>
   `;
 
+  if (elements.popularTableBody) elements.popularTableBody.innerHTML = skeletonRow.repeat(4);
   if (elements.ziynetTableBody) elements.ziynetTableBody.innerHTML = skeletonRow.repeat(6);
   if (elements.gramTableBody) elements.gramTableBody.innerHTML = skeletonRow.repeat(4);
   if (elements.borsaTableBody) elements.borsaTableBody.innerHTML = skeletonRow.repeat(2);
