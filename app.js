@@ -12,7 +12,7 @@ const CONFIG = {
   REFRESH_INTERVAL: 30000, // 30 saniye
 
   // API Endpoint'leri
-  API_GOLD: 'https://static.altinkaynak.com/public/Gold',
+  API_GOLD: 'https://altin-fiyat-proxy.yasireminciftci.workers.dev',
 
   // Gösterilecek altın türleri ve sıralama
   // Ziynet Altınları
