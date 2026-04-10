@@ -18,8 +18,8 @@ const CONFIG = {
   // Popüler Altınlar (en üstte gösterilir)
   POPULAR_CODES: ['GA', 'C', 'Y', 'T'],
 
-  // Ziynet Altınları (Eski olanlar en alta)
-  ZIYNET_CODES: ['G', 'EG', 'A', 'A5', 'R', 'H', 'EC', 'EY', 'ET'],
+  // Ziynet Altınları (Eski olanlar en alta, --- separator satırı)
+  ZIYNET_CODES: ['G', 'A', 'A5', 'R', 'H', '---', 'EG', 'EC', 'EY', 'ET'],
   // Gram & Ayar Altınları
   GRAM_CODES: ['GA', 'GAT', 'HH_T', 'CH_T', 'B', 'B_T', '18', '14'],
   // Borsa & Diğer
@@ -35,16 +35,19 @@ const CONFIG = {
     'XAUUSD': '🌍', 'AG_T': '🪨', 'IAB_KAPANIS': '🏛️'
   },
 
+  // Eski altın kodları ("Eski" etiketi gösterilir)
+  ESKI_SET: new Set(['EC', 'EY', 'ET', 'EG']),
+
   // Ürün açıklama düzeltmeleri (gösterilecek isimler)
   DISPLAY_NAMES: {
-    'C': 'Yeni Çeyrek Altın',
-    'EC': 'Eski Çeyrek Altın',
-    'Y': 'Yeni Yarım Altın',
-    'EY': 'Eski Yarım Altın',
-    'T': 'Yeni Teklik Altın',
-    'ET': 'Eski Teklik Altın',
-    'G': 'Yeni Gremse Altın',
-    'EG': 'Eski Gremse Altın',
+    'C': 'Çeyrek Altın',
+    'EC': 'Çeyrek Altın',
+    'Y': 'Yarım Altın',
+    'EY': 'Yarım Altın',
+    'T': 'Teklik Altın',
+    'ET': 'Teklik Altın',
+    'G': 'Gremse Altın',
+    'EG': 'Gremse Altın',
     'A': 'Ata Cumhuriyet',
     'A5': 'Ata Beşli',
     'R': 'Reşat Altın',
@@ -189,6 +192,18 @@ function renderTable(tableBody, codes) {
   let count = 0;
 
   codes.forEach(code => {
+    // Separator satırı
+    if (code === '---') {
+      html += `
+        <tr class="table-separator">
+          <td colspan="3">
+            <span class="separator-label">Eski Altınlar</span>
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
     const item = dataMap[code];
     if (!item) return;
     count++;
@@ -197,19 +212,21 @@ function renderTable(tableBody, codes) {
     const displayName = CONFIG.DISPLAY_NAMES[code] || item.Aciklama;
     const alis = formatAlis(item.Alis);
     const satis = addMarkupSatis(item.Satis);
+    const isEski = CONFIG.ESKI_SET.has(code);
 
     // Fiyat değişimi kontrolü
     const prev = previousPrices[code];
     const hasChanged = prev && (prev.alis !== item.Alis || prev.satis !== item.Satis);
     const flashClass = hasChanged ? 'price-flash' : '';
+    const eskiClass = isEski ? 'row-eski' : '';
 
     html += `
-      <tr class="${flashClass}" data-code="${code}">
+      <tr class="${flashClass} ${eskiClass}" data-code="${code}">
         <td>
           <span class="product-icon">${icon}</span>
           <span class="product-name">
             ${displayName}
-            <span class="product-code">${code}</span>
+            ${isEski ? '<span class="eski-tag">Eski</span>' : ''}
           </span>
         </td>
         <td>${alis}</td>
@@ -311,6 +328,32 @@ function hideLoading() {
     elements.loadingOverlay.classList.add('hidden');
   }
 }
+
+// ---- IBAN Kopyala ----
+function copyIban() {
+  const iban = 'TR89002050000993950840001';
+  navigator.clipboard.writeText(iban).then(() => {
+    const btn = document.getElementById('iban-copy-btn');
+    const text = document.getElementById('iban-copy-text');
+    if (btn && text) {
+      btn.classList.add('copied');
+      text.textContent = 'Kopyalandı ✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        text.textContent = 'Kopyala';
+      }, 2000);
+    }
+  }).catch(() => {
+    // Fallback eski tarayıcılar için
+    const el = document.createElement('textarea');
+    el.value = iban;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  });
+}
+
 
 // ---- Init ----
 async function init() {
