@@ -110,7 +110,7 @@ const elements = {
   tickerContent: document.getElementById('ticker-content'),
   errorBanner: document.getElementById('error-banner'),
   errorMessage: document.getElementById('error-message'),
-  markupValue: document.getElementById('markup-value'),
+
   ziynetBadge: document.getElementById('ziynet-badge'),
   gramBadge: document.getElementById('gram-badge'),
   borsaBadge: document.getElementById('borsa-badge')
@@ -298,11 +298,6 @@ function hideLoading() {
 
 // ---- Init ----
 async function init() {
-  // Kâr marjı değerini göster
-  if (elements.markupValue) {
-    elements.markupValue.textContent = `+${CONFIG.MARKUP_AMOUNT} ₺`;
-  }
-
   // Saat başlat
   updateClock();
   setInterval(updateClock, 1000);

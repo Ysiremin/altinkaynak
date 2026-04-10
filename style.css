@@ -501,26 +501,6 @@ body::before {
   100% { background-color: transparent; }
 }
 
-/* ---- Markup Badge ---- */
-.markup-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(212, 168, 67, 0.08), rgba(212, 168, 67, 0.03));
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 10px 20px;
-  margin: 16px 0;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.markup-banner .markup-value {
-  color: var(--gold);
-  font-weight: 700;
-}
-
 /* ---- Footer ---- */
 .footer {
   margin-top: 32px;
