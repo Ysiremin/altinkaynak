@@ -5,8 +5,8 @@
 
 // ---- Ayarlar (Kolayca Değiştirilebilir) ----
 const CONFIG = {
-  // Kâr marjı (TL) - tüm alış ve satış fiyatlarına eklenir
-  MARKUP_AMOUNT: 20,
+  // Kâr marjı (TL) - sadece satış fiyatlarına eklenir
+  SATIS_MARKUP: 20,
 
   // Otomatik güncelleme aralığı (milisaniye)
   REFRESH_INTERVAL: 30000, // 30 saniye
@@ -84,12 +84,21 @@ function formatTurkishNumber(num) {
 }
 
 /**
- * Fiyata kâr marjı ekler
+ * Alış fiyatını olduğu gibi formatlar (markup yok)
  */
-function addMarkup(priceStr) {
+function formatAlis(priceStr) {
   const price = parseTurkishNumber(priceStr);
   if (price === 0) return '-';
-  return formatTurkishNumber(price + CONFIG.MARKUP_AMOUNT);
+  return formatTurkishNumber(price);
+}
+
+/**
+ * Satış fiyatına kâr marjı ekler
+ */
+function addMarkupSatis(priceStr) {
+  const price = parseTurkishNumber(priceStr);
+  if (price === 0) return '-';
+  return formatTurkishNumber(price + CONFIG.SATIS_MARKUP);
 }
 
 // ---- State ----
@@ -181,8 +190,8 @@ function renderTable(tableBody, codes) {
 
     const icon = CONFIG.ICONS[code] || '🔹';
     const displayName = CONFIG.DISPLAY_NAMES[code] || item.Aciklama;
-    const alis = addMarkup(item.Alis);
-    const satis = addMarkup(item.Satis);
+    const alis = formatAlis(item.Alis);
+    const satis = addMarkupSatis(item.Satis);
 
     // Fiyat değişimi kontrolü
     const prev = previousPrices[code];
@@ -231,7 +240,7 @@ function renderTicker() {
     const item = dataMap[code];
     if (!item) return;
     const displayName = CONFIG.DISPLAY_NAMES[code] || item.Aciklama;
-    const satis = addMarkup(item.Satis);
+    const satis = addMarkupSatis(item.Satis);
     items += `
       <span class="ticker-item">
         <span class="label">${displayName}</span>
