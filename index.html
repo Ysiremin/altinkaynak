@@ -172,13 +172,32 @@
         </span>
       </div>
       <div class="footer-divider"></div>
-      <div class="footer-source">
-        Fiyatlar <strong>Altınkaynak</strong>'tan alınmakta olup bilgi amaçlıdır.<br>
-        Kesin fiyatlar için mağazamızla iletişime geçiniz.
+
+      <!-- IBAN Kartı -->
+      <div class="iban-card">
+        <div class="iban-bank">
+          <span class="iban-bank-logo">🏦</span>
+          <span class="iban-bank-name">Kuveyt Türk</span>
+        </div>
+        <div class="iban-holder">Nevzat Arslan ve Ortağı</div>
+        <div class="iban-row">
+          <span class="iban-label">IBAN</span>
+          <span class="iban-number" id="iban-number">TR89 0020 5000 0993 9508 4000 01</span>
+          <button class="iban-copy-btn" id="iban-copy-btn" onclick="copyIban()" title="IBAN'ı Kopyala">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="iban-copy-text">Kopyala</span>
+          </button>
+        </div>
       </div>
+
+      <div class="footer-divider"></div>
       <div class="footer-copyright">
         © 2026 Altın Pınarı Kuyumculuk. Tüm hakları saklıdır.
       </div>
+
     </div>
   </footer>
 

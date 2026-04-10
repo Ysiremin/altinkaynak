@@ -551,7 +551,198 @@ body::before {
   100% { background-color: transparent; }
 }
 
+/* ---- Separator Satırı ---- */
+.table-separator td {
+  padding: 6px 16px;
+  background: rgba(212, 168, 67, 0.05);
+  border-top: 1px solid var(--border-color-strong);
+  border-bottom: 1px solid var(--border-color-strong);
+  text-align: center;
+}
+
+.separator-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.separator-label::before,
+.separator-label::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+  opacity: 0.4;
+}
+
+.separator-label::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* ---- Eski Satır & Etiketi ---- */
+.row-eski {
+  opacity: 0.72;
+}
+
+.row-eski:hover {
+  opacity: 1;
+}
+
+.eski-tag {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* ---- Popüler satırlarına altin sol border ---- */
+.section-popular .price-table tbody tr td:first-child {
+  border-left: 2px solid rgba(212, 168, 67, 0.3);
+  padding-left: 14px;
+}
+
+.section-popular .price-table tbody tr:hover td:first-child {
+  border-left-color: var(--gold);
+  border-left-width: 3px;
+  transition: border var(--transition-fast);
+}
+
+
+/* ---- IBAN Kart ---- */
+.iban-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(0, 100, 80, 0.12), rgba(0, 80, 60, 0.08));
+  border: 1px solid rgba(0, 160, 120, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 18px 28px;
+  margin: 4px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.iban-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 180, 130, 0.5), transparent);
+}
+
+.iban-bank {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.iban-bank-logo {
+  font-size: 1rem;
+}
+
+.iban-bank-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4ecba0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.iban-holder {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+}
+
+.iban-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+}
+
+.iban-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #4ecba0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  flex-shrink: 0;
+}
+
+.iban-number {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  font-family: var(--font-body);
+}
+
+.iban-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(78, 203, 160, 0.12);
+  border: 1px solid rgba(78, 203, 160, 0.3);
+  color: #4ecba0;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  letter-spacing: 0.3px;
+}
+
+.iban-copy-btn:hover {
+  background: rgba(78, 203, 160, 0.22);
+  border-color: rgba(78, 203, 160, 0.6);
+  transform: translateY(-1px);
+}
+
+.iban-copy-btn.copied {
+  background: rgba(78, 203, 160, 0.25);
+  border-color: #4ecba0;
+  color: #4ecba0;
+}
+
+@media (max-width: 640px) {
+  .iban-row {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .iban-number {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+}
+
 /* ---- Footer ---- */
+
 .footer {
   margin-top: 32px;
   padding: 28px 0;
