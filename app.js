@@ -14,8 +14,11 @@ const CONFIG = {
   // API
   API_GOLD: 'https://altin-fiyat-proxy.yasireminciftci.workers.dev',
 
-  // Sarrafiye: Eski→Yeni çiftler halinde, sonra diğerleri
-  ZIYNET_CODES: ['EC', 'C', 'EY', 'Y', 'ET', 'T', 'EG', 'G', 'A', 'A5', 'R', 'H'],
+  // Sarrafiye: Sadece yeni olanlar
+  ZIYNET_CODES: ['C', 'Y', 'T', 'G', 'A', 'A5', 'R', 'H'],
+
+  // Eski Sarrafiye
+  ESKI_SARRAFIYE_CODES: ['EC', 'EY', 'ET', 'EG'],
 
   // Gram & Toptan (22 Ayar Hurda kaldırıldı)
   GRAM_CODES: ['GA', 'GAT', 'HH_T', 'CH_T', 'A_T', 'B', '18', '14'],
@@ -38,15 +41,8 @@ const CONFIG = {
   PAIR_ESKI: new Set(['EC', 'EY', 'ET', 'EG']),
   PAIR_YENI: new Set(['C', 'Y', 'T', 'G']),
 
-  // İkonlar
-  ICONS: {
-    'C': '💰', 'EC': '💰', 'Y': '🪙', 'EY': '🪙',
-    'T': '🥇', 'ET': '🥇', 'G': '🏆', 'EG': '🏆',
-    'A': '⭐', 'A5': '🌟', 'R': '👑', 'H': '👑',
-    'GA': '📊', 'GAT': '📊', 'HH_T': '🔶', 'CH_T': '🔷',
-    'A_T': '⭐', 'B': '📿', '18': '🔸', '14': '🔹',
-    'XAUUSD': '🌍', 'AG_T': '🪨'
-  },
+  // İkonlar (Kaldırıldı)
+  ICONS: {},
 
   // Gösterilecek isimler
   DISPLAY_NAMES: {
@@ -127,7 +123,9 @@ const elements = {
 
   ziynetBadge: document.getElementById('ziynet-badge'),
   gramBadge: document.getElementById('gram-badge'),
-  borsaBadge: document.getElementById('borsa-badge')
+  borsaBadge: document.getElementById('borsa-badge'),
+  eskiSarrafiyeBadge: document.getElementById('eski-sarrafiye-badge'),
+  eskiSarrafiyeTableBody: document.getElementById('eski-sarrafiye-table-body')
 };
 
 // ---- Saat ----
@@ -193,7 +191,7 @@ function renderTable(tableBody, codes) {
     if (!item) return;
     count++;
 
-    const icon = CONFIG.ICONS[code] || '🔹';
+    const icon = CONFIG.ICONS[code] || '';
     const displayName = CONFIG.DISPLAY_NAMES[code] || item.Aciklama;
     const isEski = CONFIG.ESKI_SET.has(code);
     const isPairYeni = CONFIG.PAIR_YENI && CONFIG.PAIR_YENI.has(code);
@@ -253,7 +251,7 @@ function renderTable(tableBody, codes) {
     html += `
       <tr class="${rowClass.trim()}" data-code="${code}">
         <td>
-          <span class="product-icon">${icon}</span>
+          ${icon ? `<span class="product-icon">${icon}</span>` : ''}
           <span class="product-name">${displayName}${tagHTML}</span>
         </td>
         <td>${alisStr}</td>
@@ -271,10 +269,12 @@ function renderAllTables() {
   const zCount = renderTable(elements.ziynetTableBody, CONFIG.ZIYNET_CODES);
   const gCount = renderTable(elements.gramTableBody, CONFIG.GRAM_CODES);
   const bCount = renderTable(elements.borsaTableBody, CONFIG.BORSA_CODES);
+  const esCount = renderTable(elements.eskiSarrafiyeTableBody, CONFIG.ESKI_SARRAFIYE_CODES);
 
   if (elements.ziynetBadge) elements.ziynetBadge.textContent = `${zCount} ürün`;
   if (elements.gramBadge) elements.gramBadge.textContent = `${gCount} ürün`;
   if (elements.borsaBadge) elements.borsaBadge.textContent = `${bCount} ürün`;
+  if (elements.eskiSarrafiyeBadge) elements.eskiSarrafiyeBadge.textContent = `${esCount} ürün`;
 }
 
 // ---- Ticker ----
@@ -321,7 +321,6 @@ function renderSkeletons() {
   const skeletonRow = `
     <tr>
       <td>
-        <span class="product-icon" style="opacity:0.3">⬜</span>
         <span class="product-name"><span class="skeleton" style="width:120px"></span></span>
       </td>
       <td><span class="skeleton"></span></td>
@@ -329,9 +328,10 @@ function renderSkeletons() {
     </tr>
   `;
 
-  if (elements.ziynetTableBody) elements.ziynetTableBody.innerHTML = skeletonRow.repeat(12);
+  if (elements.ziynetTableBody) elements.ziynetTableBody.innerHTML = skeletonRow.repeat(8);
   if (elements.gramTableBody) elements.gramTableBody.innerHTML = skeletonRow.repeat(9);
   if (elements.borsaTableBody) elements.borsaTableBody.innerHTML = skeletonRow.repeat(2);
+  if (elements.eskiSarrafiyeTableBody) elements.eskiSarrafiyeTableBody.innerHTML = skeletonRow.repeat(4);
 }
 
 // ---- Hata ----

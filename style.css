@@ -8,38 +8,38 @@
 
 /* ---- CSS Variables ---- */
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-card: #161616;
-  --bg-table-row: #1a1a1a;
-  --bg-table-row-alt: #141414;
-  --bg-table-hover: #222222;
+  --bg-primary: #fdfcf9;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-table-row: #ffffff;
+  --bg-table-row-alt: #f8f6f2;
+  --bg-table-hover: #fcfaf5;
 
   --gold-dark: #8b6914;
-  --gold: #d4a843;
-  --gold-light: #f0d78c;
-  --gold-glow: rgba(212, 168, 67, 0.15);
-  --gold-glow-strong: rgba(212, 168, 67, 0.3);
+  --gold: #b8860b;
+  --gold-light: #daa520;
+  --gold-glow: rgba(184, 134, 11, 0.08);
+  --gold-glow-strong: rgba(184, 134, 11, 0.15);
 
-  --text-primary: #f5f0e8;
-  --text-secondary: #b0a48e;
-  --text-muted: #6b6358;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #8e8e8e;
 
-  --green: #4ade80;
-  --green-bg: rgba(74, 222, 128, 0.08);
-  --red: #f87171;
-  --red-bg: rgba(248, 113, 113, 0.08);
+  --green: #1b5e20;
+  --green-bg: rgba(27, 94, 32, 0.05);
+  --red: #b71c1c;
+  --red-bg: rgba(183, 28, 28, 0.05);
 
-  --border-color: rgba(212, 168, 67, 0.12);
-  --border-color-strong: rgba(212, 168, 67, 0.25);
+  --border-color: rgba(184, 134, 11, 0.15);
+  --border-color-strong: rgba(184, 134, 11, 0.25);
 
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
 
-  --shadow-gold: 0 0 30px rgba(212, 168, 67, 0.08);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 4px 20px rgba(184, 134, 11, 0.1);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04);
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -172,15 +172,9 @@ body::before {
 
 .tv-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1.1fr 1fr 0.9fr;
+  gap: 16px;
   align-items: start;
-}
-
-.tv-right-col {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 /* ---- TV Sections ---- */
@@ -213,18 +207,18 @@ body::before {
 
 .tv-section-title {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: var(--gold-light);
+  color: var(--gold-dark);
   letter-spacing: 0.5px;
 }
 
 .tv-section-badge {
   margin-left: auto;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   background: var(--bg-table-row);
-  padding: 2px 8px;
+  padding: 4px 12px;
   border-radius: 20px;
   border: 1px solid var(--border-color);
 }
@@ -255,15 +249,15 @@ body::before {
 }
 
 .tv-table thead th {
-  background: linear-gradient(180deg, var(--bg-table-row) 0%, var(--bg-card) 100%);
-  padding: 9px 12px;
+  background: #fdfaf3;
+  padding: 12px 16px;
   text-align: left;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--gold-dark);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  border-bottom: 1px solid var(--border-color-strong);
+  border-bottom: 2px solid var(--border-color-strong);
 }
 
 .tv-table thead th:nth-child(1) { width: 44%; }
@@ -287,26 +281,26 @@ body::before {
 }
 
 .tv-table tbody td {
-  padding: 7px 12px;
-  font-size: 0.85rem;
+  padding: 12px 16px;
+  font-size: 1.05rem;
   vertical-align: middle;
 }
 
 .tv-table tbody td:first-child {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .tv-table tbody td:nth-child(2),
 .tv-table tbody td:nth-child(3) {
   text-align: right;
-  font-weight: 700;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
 }
 
 .tv-table tbody td:nth-child(2) { color: var(--green); }
@@ -346,6 +340,62 @@ body::before {
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+.section-eski-sarrafiye {
+  margin-top: 24px;
+}
+
+.section-eski-sarrafiye .tv-table tbody {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+}
+
+.section-eski-sarrafiye .tv-table tr {
+  display: contents;
+}
+
+.section-eski-sarrafiye .tv-table td,
+.section-eski-sarrafiye .tv-table th {
+  border: 1px solid var(--border-color);
+}
+
+/* Redesigning Eski Section to be a horizontal grid of cards for better layout */
+.section-eski-sarrafiye .tv-table-wrapper {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.section-eski-sarrafiye .tv-table {
+  display: block;
+}
+
+.section-eski-sarrafiye tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.section-eski-sarrafiye tr {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  padding: 8px 4px;
+  box-shadow: var(--shadow-card);
+}
+
+.section-eski-sarrafiye thead {
+  display: none; /* Hide header for this specific grid view */
+}
+
+.section-eski-sarrafiye td {
+  padding: 12px 16px !important;
+  border: none !important;
 }
 
 /* ---- Header TV compact ---- */
@@ -388,7 +438,7 @@ body::before {
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -413,10 +463,10 @@ body::before {
 
 .live-clock {
   font-family: var(--font-body);
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -782,7 +832,7 @@ body {
 
 /* ---- Eski Satır & Etiketi ---- */
 .row-eski {
-  opacity: 0.65;
+  opacity: 1; /* Reset opacity for light theme */
 }
 
 .row-eski:hover {
@@ -803,8 +853,8 @@ body {
   font-size: 0.52rem;
   font-weight: 700;
   color: var(--text-muted);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 3px;
   padding: 1px 5px;
   letter-spacing: 0.8px;
@@ -847,15 +897,15 @@ body {
   flex-direction: row;
   align-items: center;
   gap: 18px;
-  background: linear-gradient(135deg, rgba(0, 120, 90, 0.15), rgba(0, 80, 60, 0.08));
-  border: 1px solid rgba(78, 203, 160, 0.3);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 14px 20px;
   margin: 0;
   position: relative;
   overflow: hidden;
   text-align: left;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(78,203,160,0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .iban-card::before {
@@ -873,7 +923,7 @@ body {
 .iban-qr-img {
   display: block;
   border-radius: 8px;
-  border: 2px solid rgba(78, 203, 160, 0.3);
+  border: 2px solid var(--border-color);
   background: #fff;
 }
 
@@ -896,7 +946,7 @@ body {
 .iban-bank-name {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #4ecba0;
+  color: var(--gold-dark);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -912,8 +962,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #fdfaf3;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 8px 14px;
   flex-wrap: wrap;
@@ -922,7 +972,7 @@ body {
 .iban-label {
   font-size: 0.6rem;
   font-weight: 700;
-  color: #4ecba0;
+  color: var(--gold-dark);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   flex-shrink: 0;
@@ -941,9 +991,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(78, 203, 160, 0.12);
-  border: 1px solid rgba(78, 203, 160, 0.3);
-  color: #4ecba0;
+  background: var(--gold-glow);
+  border: 1px solid var(--border-color);
+  color: var(--gold-dark);
   border-radius: 6px;
   padding: 5px 10px;
   font-size: 0.72rem;
@@ -956,15 +1006,15 @@ body {
 }
 
 .iban-copy-btn:hover {
-  background: rgba(78, 203, 160, 0.22);
-  border-color: rgba(78, 203, 160, 0.6);
+  background: var(--gold-glow-strong);
+  border-color: var(--border-color-strong);
   transform: translateY(-1px);
 }
 
 .iban-copy-btn.copied {
-  background: rgba(78, 203, 160, 0.25);
-  border-color: #4ecba0;
-  color: #4ecba0;
+  background: var(--green-bg);
+  border-color: var(--green);
+  color: var(--green);
 }
 
 @media (max-width: 640px) {

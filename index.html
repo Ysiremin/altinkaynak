@@ -49,16 +49,15 @@
 
     <!-- Error Banner -->
     <div class="error-banner" id="error-banner">
-      ⚠️ <span id="error-message">Bir hata oluştu</span>
+      <span id="error-message">Bir hata oluştu</span>
     </div>
 
     <!-- TV Grid: Sol = Sarrafiye | Sağ = Gram Toptan + Diğer -->
     <div class="tv-grid">
 
-      <!-- SOL KOLON: Sarrafiye -->
+      <!-- KOLON 1: Sarrafiye -->
       <section class="tv-section" id="section-ziynet">
         <div class="tv-section-header">
-          <span class="tv-section-icon">🏅</span>
           <h2 class="tv-section-title">Sarrafiye</h2>
           <span class="tv-section-badge" id="ziynet-badge">Yükleniyor</span>
         </div>
@@ -67,8 +66,8 @@
             <thead>
               <tr>
                 <th>Ürün</th>
-                <th>Alış (₺)</th>
-                <th>Satış (₺)</th>
+                <th>Alış</th>
+                <th>Satış</th>
               </tr>
             </thead>
             <tbody id="ziynet-table-body">
@@ -78,57 +77,73 @@
         </div>
       </section>
 
-      <!-- SAĞ KOLON: Gram & Toptan + Diğer -->
-      <div class="tv-right-col">
+      <!-- KOLON 2: Gram & Toptan -->
+      <section class="tv-section" id="section-gram">
+        <div class="tv-section-header">
+          <h2 class="tv-section-title">Gram &amp; Toptan</h2>
+          <span class="tv-section-badge" id="gram-badge">Yükleniyor</span>
+        </div>
+        <div class="tv-table-wrapper">
+          <table class="tv-table" id="gram-table">
+            <thead>
+              <tr>
+                <th>Ürün</th>
+                <th>Alış</th>
+                <th>Satış</th>
+              </tr>
+            </thead>
+            <tbody id="gram-table-body">
+              <!-- JS ile doldurulacak -->
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <!-- Gram & Toptan -->
-        <section class="tv-section" id="section-gram">
-          <div class="tv-section-header">
-            <span class="tv-section-icon">⚖️</span>
-            <h2 class="tv-section-title">Gram &amp; Toptan</h2>
-            <span class="tv-section-badge" id="gram-badge">Yükleniyor</span>
-          </div>
-          <div class="tv-table-wrapper">
-            <table class="tv-table" id="gram-table">
-              <thead>
-                <tr>
-                  <th>Ürün</th>
-                  <th>Alış (₺)</th>
-                  <th>Satış (₺)</th>
-                </tr>
-              </thead>
-              <tbody id="gram-table-body">
-                <!-- JS ile doldurulacak -->
-              </tbody>
-            </table>
-          </div>
-        </section>
+      <!-- KOLON 3: Diğer (Dünya Borsası vs) -->
+      <section class="tv-section" id="section-borsa">
+        <div class="tv-section-header">
+          <h2 class="tv-section-title">Diğer</h2>
+          <span class="tv-section-badge" id="borsa-badge">Yükleniyor</span>
+        </div>
+        <div class="tv-table-wrapper">
+          <table class="tv-table" id="borsa-table">
+            <thead>
+              <tr>
+                <th>Ürün</th>
+                <th>Alış</th>
+                <th>Satış</th>
+              </tr>
+            </thead>
+            <tbody id="borsa-table-body">
+              <!-- JS ile doldurulacak -->
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <!-- Diğer -->
-        <section class="tv-section tv-section-small" id="section-borsa">
-          <div class="tv-section-header">
-            <span class="tv-section-icon">🌍</span>
-            <h2 class="tv-section-title">Diğer</h2>
-            <span class="tv-section-badge" id="borsa-badge">Yükleniyor</span>
-          </div>
-          <div class="tv-table-wrapper">
-            <table class="tv-table" id="borsa-table">
-              <thead>
-                <tr>
-                  <th>Ürün</th>
-                  <th>Alış (₺)</th>
-                  <th>Satış (₺)</th>
-                </tr>
-              </thead>
-              <tbody id="borsa-table-body">
-                <!-- JS ile doldurulacak -->
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-      </div><!-- /tv-right-col -->
     </div><!-- /tv-grid -->
+
+    <!-- Eski Sarrafiye Bölümü -->
+    <section class="tv-section section-eski-sarrafiye" id="section-eski-sarrafiye">
+      <div class="tv-section-header">
+        <h2 class="tv-section-title">Eski Sarrafiye</h2>
+        <span class="tv-section-badge" id="eski-sarrafiye-badge">Yükleniyor</span>
+      </div>
+      <div class="tv-table-wrapper">
+        <table class="tv-table" id="eski-sarrafiye-table">
+          <thead>
+            <tr>
+              <th>Ürün</th>
+              <th>Alış</th>
+              <th>Satış</th>
+            </tr>
+          </thead>
+          <tbody id="eski-sarrafiye-table-body">
+            <!-- JS ile doldurulacak -->
+          </tbody>
+        </table>
+      </div>
+    </section>
 
   </main>
 
@@ -138,15 +153,13 @@
     <div class="footer-left">
       <div class="footer-brand-row">
         <img src="logo.png" alt="Logo" class="footer-logo" width="28" height="28">
-        <span class="footer-brand-name">✦ Altın Pınarı Kuyumculuk ✦</span>
+        <span class="footer-brand-name">Altın Pınarı Kuyumculuk</span>
       </div>
       <div class="footer-contact">
         <span class="footer-contact-item">
-          <span class="icon">📍</span>
           <span>Bağlarbaşı, Kızlarpınarı Cd., Keçiören/Ankara</span>
         </span>
         <span class="footer-contact-item">
-          <span class="icon">📞</span>
           <span>(0312) 359 49 59</span>
         </span>
       </div>
@@ -165,7 +178,6 @@
       </div>
       <div class="iban-info-section">
         <div class="iban-bank">
-          <span class="iban-bank-logo">🏦</span>
           <span class="iban-bank-name">Kuveyt Türk</span>
           <span class="iban-holder-inline">— Nevzat Arslan ve Ortağı</span>
         </div>
