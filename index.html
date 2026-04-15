@@ -1,204 +1,121 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Altın Pınarı Kuyumculuk - Güncel altın fiyatları, ziynet altınları, gram altın ve döviz kurları. Canlı kuyumcu panosu.">
-  <title>Altın Pınarı Kuyumculuk | Güncel Altın Fiyatları</title>
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altın Pınarı | Yönetim Paneli</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div class="loading-overlay" id="loading-overlay">
-    <img src="logo.png" alt="Logo" class="loading-logo">
-    <div class="loading-text">ALTIN PINARI</div>
-    <div class="loading-bar"></div>
-  </div>
-
-  <!-- Ticker Bar -->
-  <div class="ticker-bar">
-    <div class="ticker-content" id="ticker-content">
-      <span class="ticker-item"><span class="label">Fiyatlar yükleniyor...</span></span>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-brand">
-        <img src="logo.png" alt="Altın Pınarı Logo" class="header-logo" id="header-logo">
-        <div>
-          <h1 class="header-title">Altın Pınarı</h1>
-          <div class="header-subtitle">Kuyumculuk</div>
-        </div>
-      </div>
-      <div class="header-right">
-        <div class="live-clock" id="live-clock">--:--:--</div>
-        <div class="live-date" id="live-date">Yükleniyor...</div>
-        <div class="update-badge">
-          <span class="update-dot"></span>
-          <span id="update-time">Güncelleniyor...</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="tv-main">
-
-    <!-- Error Banner -->
-    <div class="error-banner" id="error-banner">
-      <span id="error-message">Bir hata oluştu</span>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader"></div>
     </div>
 
-    <!-- TV Grid: Sol = Sarrafiye | Sağ = Gram Toptan + Diğer -->
-    <div class="tv-grid">
-
-      <!-- KOLON 1: Sarrafiye -->
-      <section class="tv-section" id="section-ziynet">
-        <div class="tv-section-header">
-          <h2 class="tv-section-title">Sarrafiye</h2>
-          <span class="tv-section-badge" id="ziynet-badge">Yükleniyor</span>
+    <!-- Login Container -->
+    <div id="login-container" class="login-container hidden">
+        <div class="login-card">
+            <img src="logo.png" alt="Logo" class="login-logo">
+            <h1>Yönetici Girişi</h1>
+            <p>Devam etmek için lütfen giriş yapın.</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">E-posta</label>
+                    <input type="email" id="email" required placeholder="admin@altinpinari.com">
+                </div>
+                <div class="input-group">
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Giriş Yap</button>
+                <div id="login-error" class="error-text"></div>
+            </form>
         </div>
-        <div class="tv-table-wrapper">
-          <table class="tv-table" id="ziynet-table">
-            <thead>
-              <tr>
-                <th>Ürün</th>
-                <th>Alış</th>
-                <th>Satış</th>
-              </tr>
-            </thead>
-            <tbody id="ziynet-table-body">
-              <!-- JS ile doldurulacak -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- KOLON 2: Gram & Toptan -->
-      <section class="tv-section" id="section-gram">
-        <div class="tv-section-header">
-          <h2 class="tv-section-title">Gram &amp; Toptan</h2>
-          <span class="tv-section-badge" id="gram-badge">Yükleniyor</span>
-        </div>
-        <div class="tv-table-wrapper">
-          <table class="tv-table" id="gram-table">
-            <thead>
-              <tr>
-                <th>Ürün</th>
-                <th>Alış</th>
-                <th>Satış</th>
-              </tr>
-            </thead>
-            <tbody id="gram-table-body">
-              <!-- JS ile doldurulacak -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- KOLON 3: Diğer (Dünya Borsası vs) -->
-      <section class="tv-section" id="section-borsa">
-        <div class="tv-section-header">
-          <h2 class="tv-section-title">Diğer</h2>
-          <span class="tv-section-badge" id="borsa-badge">Yükleniyor</span>
-        </div>
-        <div class="tv-table-wrapper">
-          <table class="tv-table" id="borsa-table">
-            <thead>
-              <tr>
-                <th>Ürün</th>
-                <th>Alış</th>
-                <th>Satış</th>
-              </tr>
-            </thead>
-            <tbody id="borsa-table-body">
-              <!-- JS ile doldurulacak -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-    </div><!-- /tv-grid -->
-
-    <!-- Eski Sarrafiye Bölümü -->
-    <section class="tv-section section-eski-sarrafiye" id="section-eski-sarrafiye">
-      <div class="tv-section-header">
-        <h2 class="tv-section-title">Eski Sarrafiye</h2>
-        <span class="tv-section-badge" id="eski-sarrafiye-badge">Yükleniyor</span>
-      </div>
-      <div class="tv-table-wrapper">
-        <table class="tv-table" id="eski-sarrafiye-table">
-          <thead>
-            <tr>
-              <th>Ürün</th>
-              <th>Alış</th>
-              <th>Satış</th>
-            </tr>
-          </thead>
-          <tbody id="eski-sarrafiye-table-body">
-            <!-- JS ile doldurulacak -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="tv-footer">
-    <!-- Sol: Marka + İletişim -->
-    <div class="footer-left">
-      <div class="footer-brand-row">
-        <img src="logo.png" alt="Logo" class="footer-logo" width="28" height="28">
-        <span class="footer-brand-name">Altın Pınarı Kuyumculuk</span>
-      </div>
-      <div class="footer-contact">
-        <span class="footer-contact-item">
-          <span>Bağlarbaşı, Kızlarpınarı Cd., Keçiören/Ankara</span>
-        </span>
-        <span class="footer-contact-item">
-          <span>(0312) 359 49 59</span>
-        </span>
-      </div>
     </div>
 
-    <!-- Sağ: IBAN Kartı -->
-    <div class="iban-card">
-      <div class="iban-qr-section">
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=TR890020500009939508400001&bgcolor=ffffff&margin=4"
-          alt="IBAN QR Kod"
-          class="iban-qr-img"
-          width="72"
-          height="72"
-        >
-      </div>
-      <div class="iban-info-section">
-        <div class="iban-bank">
-          <span class="iban-bank-name">Kuveyt Türk</span>
-          <span class="iban-holder-inline">— Nevzat Arslan ve Ortağı</span>
-        </div>
-        <div class="iban-row">
-          <span class="iban-label">IBAN</span>
-          <span class="iban-number" id="iban-number">TR89 0020 5000 0993 9508 4000 01</span>
-          <button class="iban-copy-btn" id="iban-copy-btn" onclick="copyIban()" title="IBAN'ı Kopyala">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            <span id="iban-copy-text">Kopyala</span>
-          </button>
-        </div>
-      </div>
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard hidden">
+        <header class="admin-header">
+            <div class="header-left">
+                <img src="logo.png" alt="Logo" class="admin-logo">
+                <div>
+                    <h2>Altın Pınarı</h2>
+                    <p>Yönetim Paneli</p>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn-outline">Çıkış Yap</button>
+        </header>
+
+        <main class="admin-main">
+            <!-- Alert Section -->
+            <div id="status-alert" class="alert hidden"></div>
+
+            <!-- Maintenance Mode Card -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h3>Site Durumu</h3>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="maintenance-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="maintenance-status-label">Normal</span>
+                    </div>
+                </div>
+                <p class="card-desc">Bakım modunu açtığınızda müşteriler fiyatları göremez, sadece bakım ekranını görürler.</p>
+            </section>
+
+            <!-- Global Price Settings -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h3>Fiyat Ayarları</h3>
+                </div>
+                <div class="settings-grid">
+                    <div class="input-group">
+                        <label for="satis-markup">Genel Kâr Marjı (TL)</label>
+                        <div class="input-with-action">
+                            <input type="number" id="satis-markup" placeholder="Örn: 20">
+                            <button class="btn-inline" onclick="updateConfigField('satisMarkup', 'satis-markup')">Kaydet</button>
+                        </div>
+                        <small>Tüm satış fiyatlarına eklenen sabit tutardır.</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Price Adjustments -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h3>Ürün Bazlı Düzeltmeler</h3>
+                    <button class="btn-text" id="refresh-adjustments">Yenile</button>
+                </div>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Ürün</th>
+                                <th>Alış Ayar (TL)</th>
+                                <th>Satış Ayar (TL)</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adjustments-body">
+                            <!-- JS ile doldurulacak -->
+                            <tr class="loading-row"><td colspan="4">Yükleniyor...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <div class="footer-copy">© 2026 Altın Pınarı</div>
-  </footer>
-
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
